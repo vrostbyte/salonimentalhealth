@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saloni Mental Health | Megan Presley, PMHNP-BC | Arizona Telehealth</title>
+  <meta name="description" content="Board-certified Psychiatric Nurse Practitioner serving children, teens, and adults via telehealth across Arizona. U.S. Army veteran. 28+ years nursing experience. Accepting new patients. Free 15-min consultation." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════════
+       DESIGN TOKENS
+       Colors sampled from Megan's dusty-rose logo.
+    ══════════════════════════════════════════════ */
+    :root {
+      --rose:        #C4848B;
+      --rose-light:  #E8BEC1;
+      --rose-dark:   #8A4F55;
+      --rose-pale:   #F9EFF0;
+      --cream:       #FBF8F6;
+      --cream-dark:  #F0E8E8;
+      --ink:         #2E1F21;
+      --ink-mid:     #6B4448;
+      --ink-soft:    #9B7275;
+      --white:       #FFFFFF;
+      --font-display:'Cormorant Garamond', Georgia, serif;
+      --font-body:   'Nunito', system-ui, sans-serif;
+      --t:           0.3s ease;
+      --shadow:      0 4px 24px rgba(46,31,33,0.07);
+      --shadow-lg:   0 14px 52px rgba(46,31,33,0.13);
+    }
+
+    /* ══════════════════════════════════════════════ RESET */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--cream); color: var(--ink-mid); line-height: 1.75; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ══════════════════════════════════════════════ SCROLL REVEAL
+       Elements with .reveal start hidden.
+       JS (bottom) adds .visible when they enter the viewport,
+       which triggers this CSS transition. */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.10s; }
+    .d2 { transition-delay: 0.20s; }
+    .d3 { transition-delay: 0.30s; }
+    .d4 { transition-delay: 0.42s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+    /* ══════════════════════════════════════════════ HELPERS */
+    .container { width: 92%; max-width: 1100px; margin: 0 auto; }
+    .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 0.85rem; }
+    .display-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 500; color: var(--ink); line-height: 1.15; margin-bottom: 1.25rem; }
+    .display-title em { font-style: italic; color: var(--rose); }
+    .body-text { font-size: 1rem; color: var(--ink-mid); line-height: 1.85; max-width: 540px; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header .body-text { margin: 0 auto; }
+
+    /* ══════════════════════════════════════════════ BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.9rem; border-radius: 40px; font-family: var(--font-body); font-size: 0.88rem; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: transform var(--t), box-shadow var(--t), background var(--t), color var(--t), border-color var(--t); }
+    .btn-primary { background: var(--rose); color: var(--white); border-color: var(--rose); }
+    .btn-primary:hover { background: var(--rose-dark); border-color: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(196,132,139,0.35); }
+    .btn-outline { background: transparent; color: var(--rose-dark); border-color: var(--rose); }
+    .btn-outline:hover { background: var(--rose); color: var(--white); transform: translateY(-2px); }
+    .btn-phone { background: var(--white); color: var(--rose-dark); border-color: var(--cream-dark); font-size: 0.92rem; }
+    .btn-phone:hover { border-color: var(--rose); transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    /* ══════════════════════════════════════════════ NAV */
+    #nav { position: fixed; inset: 0 0 auto 0; z-index: 200; padding: 0.9rem 0; transition: background var(--t), box-shadow var(--t); }
+    #nav.scrolled { background: rgba(251,248,246,0.96); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--cream-dark); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .nav-logo img { height: 46px; width: auto; }
+    .nav-logo-text { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--ink); }
+    .nav-logo-text span { color: var(--rose); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.84rem; font-weight: 500; color: var(--ink-soft); transition: color var(--t); }
+    .nav-links a:hover { color: var(--rose-dark); }
+    .nav-cta { padding: 0.55rem 1.3rem !important; font-size: 0.82rem !important; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all var(--t); }
+    @media (max-width: 800px) {
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); flex-direction: column; align-items: flex-start; padding: 1.5rem 5%; gap: 1.25rem; box-shadow: var(--shadow); border-top: 1px solid var(--cream-dark); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+    }
+
+    /* ══════════════════════════════════════════════ HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 0 5rem; position: relative; overflow: hidden; }
+    #hero::before { content:''; position:absolute; top:-15%; right:-8%; width:60%; height:120%; background: radial-gradient(ellipse at 60% 40%, var(--rose-light) 0%, var(--rose-pale) 45%, transparent 72%); opacity:0.55; z-index:0; border-radius:50% 40% 55% 45% / 50% 40% 60% 50%; }
+    #hero::after  { content:''; position:absolute; bottom:5%; left:-4%; width:280px; height:280px; background: radial-gradient(circle, var(--rose-pale) 0%, transparent 70%); z-index:0; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4.5rem; align-items: center; position: relative; z-index: 1; }
+
+    .status-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--rose-pale); border: 1px solid var(--rose-light); color: var(--rose-dark); font-size: 0.78rem; font-weight: 600; padding: 0.4rem 1rem; border-radius: 20px; margin-bottom: 1.5rem; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rose); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)} }
+
+    .hero-title { font-family: var(--font-display); font-size: clamp(3rem, 5.5vw, 5rem); font-weight: 500; color: var(--ink); line-height: 1.08; margin-bottom: 1.5rem; }
+    .hero-title em { font-style: italic; color: var(--rose); }
+    .hero-sub { font-size: 1.05rem; color: var(--ink-mid); line-height: 1.85; max-width: 460px; margin-bottom: 1.5rem; }
+
+    .hero-consult-note { font-size: 0.85rem; color: var(--rose-dark); font-weight: 600; margin-bottom: 1.75rem; display: flex; align-items: center; gap: 0.4rem; }
+    .hero-consult-note::before { content: '★'; font-size: 0.75rem; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; }
+
+    /* Hero card — right side */
+    .hero-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .hero-card-top { height: 4px; background: linear-gradient(90deg, var(--rose-light), var(--rose), var(--rose-dark)); }
+
+    /* Photo inside the card */
+    .hero-photo { width: 100%; aspect-ratio: 4/3.5; object-fit: cover; object-position: center top; display: block; }
+
+    .hero-card-body { padding: 1.75rem 2rem 2rem; }
+    .card-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
+    .card-cred { font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.04em; margin-bottom: 1.25rem; }
+
+    .card-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.25rem; }
+    .chip { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--rose-pale); color: var(--rose-dark); font-size: 0.73rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 20px; }
+
+    .psych-today { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.55rem 1rem; background: #1A7FBF; border-radius: 30px; margin-bottom: 1.25rem; color: white; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.03em; }
+
+    .hero-card-body .btn { width: 100%; justify-content: center; margin-bottom: 0.65rem; }
+    .card-phone-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.82rem; color: var(--ink-soft); }
+    .card-phone-row a { color: var(--rose-dark); font-weight: 600; transition: color var(--t); }
+    .card-phone-row a:hover { color: var(--rose); }
+
+    @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; gap: 3rem; } #hero::before { width:90%; opacity:0.3; } }
+
+    /* ══════════════════════════════════════════════ TRUST STRIP */
+    #trust { padding: 2rem 0; background: var(--white); border-top: 1px solid var(--cream-dark); border-bottom: 1px solid var(--cream-dark); }
+    .trust-list { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem 3rem; list-style: none; }
+    .trust-list li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); white-space: nowrap; }
+
+    /* ══════════════════════════════════════════════ ABOUT */
+    #about { padding: 7rem 0; background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: start; }
+
+    .about-photo-wrap { position: relative; }
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      display: block;
+    }
+    /* Offset decorative border behind the photo */
+    .about-photo-wrap::after { content:''; position:absolute; bottom:-16px; right:-16px; width:55%; height:55%; border:2px solid var(--rose-light); border-radius:12px; z-index:-1; }
+
+    /* Vet badge below photo */
+    .vet-badge { margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 0.85rem; background: var(--white); border-radius: 10px; padding: 1.1rem 1.25rem; box-shadow: var(--shadow); border-left: 3px solid var(--rose); }
+    .vet-badge-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+    .vet-badge-text { font-size: 0.88rem; color: var(--ink-mid); line-height: 1.6; }
+    .vet-badge-text strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.2rem; }
+
+    .credentials-list { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.55rem; }
+    .cred-row { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.88rem; color: var(--ink-mid); }
+    .cred-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rose); flex-shrink: 0; margin-top: 0.42rem; }
+
+    .about-blocks { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.75rem; }
+    .about-block h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 0.35rem; }
+    .about-block p { font-size: 0.97rem; color: var(--ink-mid); line-height: 1.85; }
+
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    /* ══════════════════════════════════════════════ SERVICES */
+    #services { padding: 7rem 0; background: var(--white); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .svc-card { background: var(--cream); border-radius: 12px; padding: 2rem; border: 1px solid var(--cream-dark); position: relative; overflow: hidden; transition: transform var(--t), box-shadow var(--t), background var(--t); }
+    .svc-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--rose-light), var(--rose)); transform: scaleX(0); transform-origin: left; transition: transform var(--t); }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); background: var(--white); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon { width: 46px; height: 46px; border-radius: 50%; background: var(--rose-pale); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem; }
+    .svc-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.55rem; }
+    .svc-card p { font-size: 0.91rem; color: var(--ink-mid); line-height: 1.75; }
+    /* "NEW" tag for GeneSight */
+    .svc-new { display: inline-block; background: var(--rose); color: white; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; padding: 0.15rem 0.5rem; border-radius: 10px; margin-left: 0.5rem; vertical-align: middle; text-transform: uppercase; }
+    @media (max-width: 860px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px) { .services-grid { grid-template-columns: 1fr; } }
+
+    /* ══════════════════════════════════════════════ CONDITIONS */
+    #conditions { padding: 4.5rem 0; background: linear-gradient(135deg, var(--rose-dark) 0%, #5A2E33 100%); position: relative; overflow: hidden; }
+    #conditions::before { content:''; position:absolute; right:-100px; top:-100px; width:400px; height:400px; border-radius:50%; border:1px solid rgba(255,255,255,0.07); }
+    #conditions::after  { content:''; position:absolute; left:-80px;  bottom:-80px; width:280px; height:280px; border-radius:50%; border:1px solid rgba(255,255,255,0.05); }
+    .conditions-inner { display:flex; align-items:center; justify-content:space-between; gap:3rem; flex-wrap:wrap; position:relative; z-index:1; }
+    .conditions-text .eyebrow { color: var(--rose-light); }
+    .conditions-text .display-title { color: var(--white); font-size: clamp(1.7rem, 3vw, 2.5rem); margin-bottom: 0; }
+    .conditions-tags { display:flex; flex-wrap:wrap; gap:0.6rem; max-width:580px; }
+    .tag { display:inline-block; padding:0.42rem 1.05rem; border-radius:25px; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.85); font-size:0.82rem; font-weight:500; background:rgba(255,255,255,0.07); transition:background var(--t), color var(--t); }
+    .tag:hover { background:rgba(255,255,255,0.18); color:var(--white); }
+
+    /* ══════════════════════════════════════════════ HOW IT WORKS */
+    #how { padding: 7rem 0; background: var(--cream); }
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3.5rem; position:relative; }
+    .steps-grid::before { content:''; position:absolute; top:30px; left:calc(16.7% + 15px); right:calc(16.7% + 15px); height:1px; background: repeating-linear-gradient(90deg, var(--rose-light) 0, var(--rose-light) 6px, transparent 6px, transparent 14px); }
+    .step { text-align:center; position:relative; z-index:1; }
+    .step-num { width:60px; height:60px; border-radius:50%; background:var(--white); border:2px solid var(--rose-light); display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem; font-family:var(--font-display); font-size:1.4rem; font-weight:500; color:var(--rose-dark); }
+    .step h3 { font-family:var(--font-display); font-size:1.2rem; font-weight:600; color:var(--ink); margin-bottom:0.6rem; }
+    .step p { font-size:0.92rem; color:var(--ink-mid); line-height:1.75; }
+    @media (max-width:680px) { .steps-grid { grid-template-columns:1fr; } .steps-grid::before { display:none; } }
+
+    /* ══════════════════════════════════════════════ INSURANCE & FEES */
+    #insurance { padding: 7rem 0; background: var(--white); }
+    .insurance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .insurance-grid .body-text { margin-bottom: 1.5rem; }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .check-list li { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.93rem; color: var(--ink-mid); }
+    .check-list li::before { content:''; width:18px; height:18px; border-radius:50%; background: var(--rose-pale) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='%238A4F55' d='M9.7 3.3 5 8 2.3 5.3l-.6.7L5 9.4l5.3-5.4z'/%3E%3C/svg%3E") no-repeat center / 12px; flex-shrink:0; margin-top:0.15rem; }
+
+    .fees-card { background: var(--cream); border-radius: 12px; padding: 2.25rem; border: 1px solid var(--cream-dark); }
+    .fees-card h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--cream-dark); }
+    .fee-row { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid var(--cream-dark); font-size: 0.9rem; gap: 1rem; }
+    .fee-row:last-child { border-bottom: none; }
+    .fee-key { color: var(--ink-soft); font-weight: 500; }
+    .fee-val { color: var(--ink); font-weight: 700; text-align: right; }
+    .fee-val.highlight { color: var(--rose-dark); font-size: 1.05rem; }
+
+    /* Insurance logos list */
+    .insurance-list-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin: 1.5rem 0 0.85rem; }
+    .ins-grid { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .ins-chip { display: inline-block; background: var(--white); border: 1px solid var(--cream-dark); color: var(--ink-mid); font-size: 0.75rem; font-weight: 500; padding: 0.28rem 0.7rem; border-radius: 6px; }
+
+    @media (max-width:800px) { .insurance-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ══════════════════════════════════════════════ APPROACH (therapy types) */
+    #approach { padding: 5rem 0; background: var(--rose-pale); }
+    .approach-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .approach-quote { font-family: var(--font-display); font-size: clamp(1.3rem, 2.5vw, 1.75rem); font-style: italic; color: var(--ink); line-height: 1.5; position: relative; padding-left: 1.5rem; border-left: 3px solid var(--rose); }
+    .approach-methods { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 2rem; }
+    .method-tag { display: inline-block; background: var(--white); border: 1px solid var(--rose-light); color: var(--rose-dark); font-size: 0.82rem; font-weight: 600; padding: 0.35rem 0.9rem; border-radius: 6px; }
+    @media (max-width:780px) { .approach-inner { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ══════════════════════════════════════════════ CTA / BOOK */
+    #book { padding: 7rem 0; background: var(--ink); text-align: center; position: relative; overflow: hidden; }
+    #book::before { content:''; position:absolute; top:-30%; left:-10%; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(196,132,139,0.18) 0%, transparent 65%); }
+    #book::after  { content:''; position:absolute; bottom:-30%; right:-8%; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle, rgba(196,132,139,0.12) 0%, transparent 65%); }
+    .book-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+    .book-logo { width: 80px; margin: 0 auto 1.75rem; }
+    .book-logo img { width: 100%; }
+    #book .eyebrow { color: var(--rose-light); }
+    #book .display-title { color: var(--white); font-size: clamp(2rem, 4vw, 3.2rem); }
+    #book .body-text { margin: 0 auto 2rem; color: rgba(251,248,246,0.7); max-width: 100%; text-align: center; }
+    .book-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem; }
+    .book-free-note { display: inline-block; background: rgba(196,132,139,0.15); border: 1px solid rgba(196,132,139,0.3); color: var(--rose-light); font-size: 0.82rem; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 20px; margin-bottom: 2rem; }
+    .book-emergency { padding: 1.25rem 1.5rem; background: rgba(255,255,255,0.06); border-radius: 8px; font-size: 0.85rem; color: rgba(251,248,246,0.55); border: 1px solid rgba(255,255,255,0.08); }
+    .book-emergency strong { color: rgba(251,248,246,0.85); }
+
+    /* ══════════════════════════════════════════════ FOOTER */
+    footer { background: #1E1215; padding: 3.5rem 0 2rem; }
+    .footer-top { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:2rem; padding-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.07); margin-bottom:1.75rem; }
+    .footer-brand { font-family:var(--font-display); font-size:1.15rem; font-weight:600; color:var(--white); }
+    .footer-brand span { color:var(--rose-light); }
+    .footer-meta { font-size:0.78rem; color:rgba(255,255,255,0.35); margin-top:0.3rem; line-height:1.7; }
+    .footer-links { display:flex; gap:2rem; list-style:none; flex-wrap:wrap; }
+    .footer-links a { font-size:0.82rem; font-weight:500; color:rgba(255,255,255,0.4); transition:color var(--t); }
+    .footer-links a:hover { color:var(--rose-light); }
+    .footer-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .footer-copy { font-size:0.76rem; color:rgba(255,255,255,0.22); }
+    .footer-crisis { font-size:0.76rem; color:rgba(255,255,255,0.28); }
+    .footer-crisis strong { color:rgba(255,255,255,0.5); }
+  </style>
+</head>
+<body>
+
+  <!-- ════ NAV ════════════════════════════════════════════ -->
+  <nav id="nav">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="./logo.png" alt="Saloni Mental Health"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+        <span class="nav-logo-text" style="display:none;">Saloni <span>Mental Health</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About Megan</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#insurance">Insurance &amp; Fees</a></li>
+        <li>
+          <a href="https://spruce.care/salonimentalhealth"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-primary nav-cta">Request Appointment</a>
+        </li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- ════ HERO ════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="container hero-grid">
+
+      <div>
+        <div class="status-badge reveal">
+          <span class="status-dot"></span> Accepting New Patients
+        </div>
+        <h1 class="hero-title reveal d1">
+          Compassionate<br><em>psychiatric care</em><br>wherever you are
+        </h1>
+        <p class="hero-sub reveal d2">
+          Board-certified psychiatric mental health care for children, adolescents,
+          and adults — delivered entirely via telehealth across Arizona so you can get
+          the support you deserve from wherever you feel comfortable.
+        </p>
+        <p class="hero-consult-note reveal d2">Free 15-minute consultation — call or message anytime</p>
+        <div class="hero-actions reveal d3">
+          <a href="https://spruce.care/salonimentalhealth"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-primary">Connect on Spruce &rarr;</a>
+          <a href="tel:6238426445" class="btn btn-phone">📞 (623) 842-6445</a>
+        </div>
+      </div>
+
+      <div class="hero-card reveal d2">
+        <div class="hero-card-top"></div>
+        <!-- Her headshot -->
+        <img src="./megan.jpg" alt="Megan Presley, PMHNP-BC" class="hero-photo" />
+        <div class="hero-card-body">
+          <div class="card-name">Megan Presley</div>
+          <div class="card-cred">MSN, APRN, PMHNP-BC &nbsp;·&nbsp; Waddell, AZ</div>
+          <div class="card-chips">
+            <span class="chip">✓ New Patients</span>
+            <span class="chip">📱 Telehealth Only</span>
+            <span class="chip">🗓 Weekends</span>
+            <span class="chip">💳 Digital Pay</span>
+            <span class="chip">🎖 U.S. Army Veteran</span>
+          </div>
+          <div class="psych-today">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="11" stroke="white" stroke-width="2"/>
+              <path d="M7 12l3.5 3.5L17 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Verified by Psychology Today
+          </div>
+          <a href="https://spruce.care/salonimentalhealth"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-primary">Request an Appointment</a>
+          <div class="card-phone-row">
+            Or call&nbsp;<a href="tel:6238426445">(623) 842-6445</a>&nbsp;for a free consult
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════ TRUST STRIP ════════════════════════════════════ -->
+  <div id="trust">
+    <div class="container">
+      <ul class="trust-list">
+        <li>🔒 HIPAA-Compliant</li>
+        <li>🌐 100% Telehealth</li>
+        <li>📋 PMHNP-BC Certified</li>
+        <li>🎖 28+ Years Nursing &bull; 12 Yrs Psychiatric</li>
+        <li>🩺 Toddlers Through Seniors</li>
+        <li>📍 Serving All of Arizona</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ════ ABOUT ════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="container about-grid">
+
+      <div class="about-photo-wrap reveal">
+        <img src="./megan.jpg"
+             alt="Megan Presley, PMHNP-BC"
+             class="about-photo" />
+
+        <!-- Military / experience badge -->
+        <div class="vet-badge reveal d1">
+          <div class="vet-badge-icon">🎖</div>
+          <div class="vet-badge-text">
+            <strong>U.S. Army Veteran</strong>
+            28+ years nursing experience &bull; 12 years dedicated to psychiatric nursing &bull; Pediatric Mental Health Specialist certification (anticipated 2026)
+          </div>
+        </div>
+
+        <div class="credentials-list reveal d2">
+          <div class="cred-row"><span class="cred-dot"></span>PMHNP-BC — American Nurses Credentialing Center</div>
+          <div class="cred-row"><span class="cred-dot"></span>MSN — Herzing University, 2024</div>
+          <div class="cred-row"><span class="cred-dot"></span>AZ License #320444</div>
+          <div class="cred-row"><span class="cred-dot"></span>Verified by Psychology Today · 2 Endorsements</div>
+          <div class="cred-row"><span class="cred-dot"></span>U.S. Army Medical Department, Practical Nurse 1996</div>
+        </div>
+      </div>
+
+      <div>
+        <p class="eyebrow reveal">About Megan</p>
+        <h2 class="display-title reveal d1">
+          A partner in your<br><em>mental health journey</em>
+        </h2>
+
+        <div class="about-blocks">
+          <div class="about-block reveal d1">
+            <h4>In Megan's Words</h4>
+            <p>
+              "Hi, I'm Megan. As a psychiatric nurse practitioner, I love helping people,
+              especially when life feels heavy or overwhelming. My work isn't just about
+              diagnoses or medication, but about understanding your story, what's getting
+              in the way, and what helps you feel like yourself again. I take a
+              down-to-earth, collaborative approach, and genuinely want you to feel
+              heard and cared for. Together, we'll find a way forward that fits you
+              and helps you reconnect with your best self."
+            </p>
+          </div>
+          <div class="about-block reveal d2">
+            <h4>My Approach</h4>
+            <p>
+              I combine medication management with psychotherapy in every session.
+              My approach is collaborative, evidence-based, and patient-centered —
+              creating a treatment plan that fits your unique story and goals. I
+              believe care should be holistic, compassionate, and paced entirely at
+              your comfort. Your goals are my goals.
+            </p>
+          </div>
+          <div class="about-block reveal d3">
+            <h4>What to Expect</h4>
+            <p>
+              Your first session will be an informal, relaxed conversation — all about
+              you and how I can best support you. From there, we'll move forward with
+              a thorough evaluation, regular follow-ups, and open communication so you
+              always feel informed and comfortable with every aspect of your care.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════ SERVICES ════════════════════════════════════════ -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow reveal">Services</p>
+        <h2 class="display-title reveal d1">How I can help you</h2>
+        <p class="body-text reveal d2">Evidence-based psychiatric care tailored to you — delivered virtually and on your schedule, including weekends.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card reveal">
+          <div class="svc-icon">🔍</div>
+          <h3>Psychiatric Evaluation</h3>
+          <p>Comprehensive initial assessments covering your history, current symptoms, and goals — the starting point for a care plan built just for you.</p>
+        </div>
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">💊</div>
+          <h3>Medication Management</h3>
+          <p>Personalized, ongoing prescription oversight and careful adjustments to keep your treatment safe and effective at every stage.</p>
+        </div>
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">🗣️</div>
+          <h3>Supportive Therapy &amp; Psychoeducation</h3>
+          <p>Guided conversations, practical coping tools, and education to help you understand your experience and build lasting resilience.</p>
+        </div>
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">👧</div>
+          <h3>Children &amp; Adolescents</h3>
+          <p>Age-appropriate psychiatric care from toddlers through teens, with specialized focus on child mental health and developmental support.</p>
+        </div>
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">🧬</div>
+          <h3>GeneSight Testing <span class="svc-new">offered</span></h3>
+          <p>Pharmacogenomic testing that analyzes how your genes affect medication response — helping find the right medication faster.</p>
+        </div>
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">🤝</div>
+          <h3>Collaborative Care</h3>
+          <p>Coordination with your therapists, primary care providers, and specialists so every part of your care stays connected and consistent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════ CONDITIONS ══════════════════════════════════════ -->
+  <section id="conditions">
+    <div class="container conditions-inner">
+      <div class="conditions-text">
+        <p class="eyebrow reveal">Specialties</p>
+        <h2 class="display-title reveal d1">Areas I treat</h2>
+      </div>
+      <div class="conditions-tags reveal d2">
+        <span class="tag">Anxiety</span>
+        <span class="tag">Depression</span>
+        <span class="tag">ADHD</span>
+        <span class="tag">Trauma &amp; PTSD</span>
+        <span class="tag">Bipolar Disorder</span>
+        <span class="tag">OCD</span>
+        <span class="tag">Borderline Personality</span>
+        <span class="tag">Eating Disorders</span>
+        <span class="tag">Addiction</span>
+        <span class="tag">Sleep &amp; Insomnia</span>
+        <span class="tag">Grief &amp; Loss</span>
+        <span class="tag">Life Transitions</span>
+        <span class="tag">First Responders</span>
+        <span class="tag">Veterans</span>
+        <span class="tag">Chronic Pain</span>
+        <span class="tag">Developmental Disorders</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════ HOW IT WORKS ════════════════════════════════════ -->
+  <section id="how">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow reveal">Getting Started</p>
+        <h2 class="display-title reveal d1">Simple steps to begin</h2>
+        <p class="body-text reveal d2">Starting care shouldn't be complicated. Here's exactly what to expect from your very first contact.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step reveal">
+          <div class="step-num">1</div>
+          <h3>Reach Out</h3>
+          <p>Call <a href="tel:6238426445" style="color:var(--rose-dark);font-weight:600;">(623) 842-6445</a> or send a secure message on Spruce. A free 15-minute consultation is available — no commitment, no pressure.</p>
+        </div>
+        <div class="step reveal d1">
+          <div class="step-num">2</div>
+          <h3>Initial Evaluation</h3>
+          <p>Your first virtual session is a relaxed, informal conversation. Megan takes time to understand your full picture before building a plan together.</p>
+        </div>
+        <div class="step reveal d2">
+          <div class="step-num">3</div>
+          <h3>Ongoing Care</h3>
+          <p>Together you'll follow a personalized plan with regular follow-ups to monitor progress and adjust as your life and needs evolve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════ TREATMENT APPROACH ══════════════════════════════ -->
+  <section id="approach">
+    <div class="container approach-inner">
+      <div class="reveal">
+        <p class="eyebrow">Treatment Approach</p>
+        <blockquote class="approach-quote">
+          "I provide a compassionate, supportive approach and listen with no judgment. Your goals are my goals when it comes to your mental health."
+        </blockquote>
+      </div>
+      <div class="reveal d1">
+        <p class="eyebrow">Therapy Methods</p>
+        <p style="font-size:0.97rem; color:var(--ink-mid); margin-bottom:0.5rem; line-height:1.7;">
+          Megan integrates multiple evidence-based modalities, meeting you wherever you are in your journey.
+        </p>
+        <div class="approach-methods">
+          <span class="method-tag">Cognitive Behavioral (CBT)</span>
+          <span class="method-tag">Compassion Focused</span>
+          <span class="method-tag">Culturally Sensitive</span>
+          <span class="method-tag">Emotionally Focused</span>
+          <span class="method-tag">Motivational Interviewing</span>
+          <span class="method-tag">Person-Centered</span>
+          <span class="method-tag">Strength-Based</span>
+          <span class="method-tag">Trauma Focused</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════ INSURANCE & FEES ════════════════════════════════ -->
+  <section id="insurance">
+    <div class="container insurance-grid">
+      <div>
+        <p class="eyebrow reveal">Insurance &amp; Billing</p>
+        <h2 class="display-title reveal d1">Transparent fees,<br><em>flexible options</em></h2>
+        <p class="body-text reveal d2">
+          Megan bills insurance directly when credentialed with your plan.
+          If not credentialed, self-pay rates are available. Sliding scale
+          eligibility is also available — because cost should never be a
+          barrier to getting support.
+        </p>
+        <ul class="check-list reveal d3">
+          <li>Insurance billed directly when credentialed with your carrier</li>
+          <li>Competitive self-pay rates if not covered</li>
+          <li>Sliding scale — apply if you may be eligible</li>
+          <li>All major credit cards accepted (Visa, MC, Amex, Discover)</li>
+          <li>Weekend and flexible appointment times</li>
+          <li>Free 15-minute phone consultation before you commit</li>
+          <li>Ongoing messaging via Spruce between sessions</li>
+        </ul>
+      </div>
+
+      <div class="fees-card reveal d2">
+        <h3>Fees &amp; Insurance</h3>
+        <div class="fee-row">
+          <span class="fee-key">Initial Session</span>
+          <span class="fee-val highlight">$150</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-key">Standard Visit</span>
+          <span class="fee-val highlight">$150</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-key">Free Consultation</span>
+          <span class="fee-val" style="color:var(--rose);">15 Minutes — No Cost</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-key">Sliding Scale</span>
+          <span class="fee-val">Available — Apply</span>
+        </div>
+        <div class="fee-row">
+          <span class="fee-key">Telehealth</span>
+          <span class="fee-val">100% Virtual</span>
+        </div>
+
+        <p class="insurance-list-label">Insurance Accepted</p>
+        <div class="ins-grid">
+          <span class="ins-chip">Aetna</span>
+          <span class="ins-chip">Blue Cross</span>
+          <span class="ins-chip">Blue Shield</span>
+          <span class="ins-chip">BCBS MA</span>
+          <span class="ins-chip">Cigna / Evernorth</span>
+          <span class="ins-chip">Medicare</span>
+          <span class="ins-chip">UnitedHealthcare</span>
+          <span class="ins-chip">Optum</span>
+          <span class="ins-chip">Carelon Behavioral Health</span>
+          <span class="ins-chip">Horizon BCBS</span>
+          <span class="ins-chip">Independence Blue Cross</span>
+          <span class="ins-chip">Quest Behavioral Health</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════ BOOKING CTA ══════════════════════════════════════ -->
+  <section id="book">
+    <div class="container">
+      <div class="book-inner">
+        <div class="book-logo reveal">
+          <img src="./logo.png" alt="Saloni Mental Health" onerror="this.style.display='none';" />
+        </div>
+        <p class="eyebrow reveal">Ready to Begin?</p>
+        <h2 class="display-title reveal d1">
+          You deserve support.<br><em>Let's take that first step.</em>
+        </h2>
+        <p class="body-text reveal d2">
+          Struggling with mental health can feel lonely. Megan is here to provide a
+          compassionate, nonjudgmental space where your experiences are honored.
+          If you're ready to explore healing and growth at a comfortable pace —
+          she invites you to reach out today.
+        </p>
+        <div class="reveal d2 book-free-note">
+          ★ Free 15-minute consultation available — no obligation
+        </div>
+        <div class="book-actions reveal d3">
+          <a href="https://spruce.care/salonimentalhealth"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-primary">Connect on Spruce &rarr;</a>
+          <a href="tel:6238426445"
+             class="btn"
+             style="background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.25);">
+            📞 (623) 842-6445
+          </a>
+        </div>
+        <div class="book-emergency reveal d4">
+          <strong>For emergencies or crisis:</strong> Call <strong>911</strong>, go to your nearest ER,
+          or dial <strong>988</strong> (Suicide &amp; Crisis Lifeline).
+          Spruce and phone messages are for non-urgent scheduling and questions only.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════ FOOTER ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Saloni <span>Mental Health</span></div>
+          <div class="footer-meta">
+            Megan Presley, MSN, APRN, PMHNP-BC &nbsp;·&nbsp; AZ License #320444<br>
+            Waddell, AZ 85355 &nbsp;·&nbsp; Telehealth serving all of Arizona
+          </div>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#insurance">Insurance &amp; Fees</a></li>
+          <li><a href="https://spruce.care/salonimentalhealth" target="_blank" rel="noopener noreferrer">Book Now</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; <span id="year"></span> Saloni Mental Health. All rights reserved.</p>
+        <p class="footer-crisis"><strong>Crisis line:</strong> Call or text <strong>988</strong></p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sticky nav — adds .scrolled class for frosted glass effect once user scrolls
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    // Mobile hamburger menu
+    const toggle   = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // Scroll reveal
+    // IntersectionObserver watches every .reveal element.
+    // When one enters the viewport, .visible is added,
+    // triggering the CSS opacity + translateY transition.
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          ro.unobserve(e.target); // animate once, then stop watching
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+  </script>
+
+</body>
+</html>
