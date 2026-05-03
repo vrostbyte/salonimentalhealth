@@ -74,7 +74,7 @@
     #nav { position: fixed; inset: 0 0 auto 0; z-index: 200; padding: 0.9rem 0; transition: background var(--t), box-shadow var(--t); }
     #nav.scrolled { background: rgba(251,248,246,0.96); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--cream-dark); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
-    .nav-logo img { height: 46px; width: auto; }
+    .nav-logo img { height: 62px; width: auto; }
     .nav-logo-text { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--ink); }
     .nav-logo-text span { color: var(--rose); }
     .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
@@ -241,7 +241,7 @@
     #book::before { content:''; position:absolute; top:-30%; left:-10%; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(196,132,139,0.18) 0%, transparent 65%); }
     #book::after  { content:''; position:absolute; bottom:-30%; right:-8%; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle, rgba(196,132,139,0.12) 0%, transparent 65%); }
     .book-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
-    .book-logo { width: 80px; margin: 0 auto 1.75rem; }
+    .book-logo { width: 120px; margin: 0 auto 1.75rem; }
     .book-logo img { width: 100%; }
     #book .eyebrow { color: var(--rose-light); }
     #book .display-title { color: var(--white); font-size: clamp(2rem, 4vw, 3.2rem); }
@@ -272,7 +272,7 @@
   <nav id="nav">
     <div class="container nav-inner">
       <a href="#hero" class="nav-logo">
-        <img src="./logo.png" alt="Saloni Mental Health"
+        <img src="./logo_transparent.png" alt="Saloni Mental Health"
              onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
         <span class="nav-logo-text" style="display:none;">Saloni <span>Mental Health</span></span>
       </a>
@@ -642,7 +642,7 @@
     <div class="container">
       <div class="book-inner">
         <div class="book-logo reveal">
-          <img src="./logo.png" alt="Saloni Mental Health" onerror="this.style.display='none';" />
+          <img src="./logo_transparent.png" alt="Saloni Mental Health" onerror="this.style.display='none';" />
         </div>
         <p class="eyebrow reveal">Ready to Begin?</p>
         <h2 class="display-title reveal d1">
