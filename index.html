@@ -153,7 +153,8 @@
     .card-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.25rem; }
     .chip { display: inline-flex; align-items: center; gap: 0.3rem; background: var(--rose-pale); color: var(--rose-dark); font-size: 0.73rem; font-weight: 600; padding: 0.28rem 0.7rem; border-radius: 20px; }
 
-    .psych-today { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.55rem 1rem; background: #1A7FBF; border-radius: 30px; margin-bottom: 1.25rem; color: white; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.03em; }
+    .psych-today { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.55rem 1rem; background: #1A7FBF; border-radius: 30px; margin-bottom: 1.25rem; color: white !important; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.03em; text-decoration: none; transition: background var(--t), transform var(--t); }
+    .psych-today:hover { background: #145f8f; transform: translateY(-1px); }
 
     .hero-card-body .btn { width: 100%; justify-content: center; margin-bottom: 0.65rem; }
     .card-phone-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.82rem; color: var(--ink-soft); }
@@ -421,13 +422,15 @@
             <span class="chip">U.S. Army Veteran</span>
             <span class="chip">Tricare / TriWest</span>
           </div>
-          <div class="psych-today">
+          <a href="https://www.psychologytoday.com/us/psychiatrists/megan-presley-waddell-az/1568151"
+             target="_blank" rel="noopener noreferrer"
+             class="psych-today">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="11" stroke="white" stroke-width="2"/>
               <path d="M7 12l3.5 3.5L17 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             Verified by Psychology Today
-          </div>
+          </a>
           <a href="https://spruce.care/salonimentalhealth"
              target="_blank" rel="noopener noreferrer"
              class="btn btn-primary">Request an Appointment</a>
@@ -498,7 +501,7 @@
           <div class="cred-row"><span class="cred-dot"></span>PMHNP-BC — American Nurses Credentialing Center</div>
           <div class="cred-row"><span class="cred-dot"></span>MSN — Herzing University, 2024</div>
           <div class="cred-row"><span class="cred-dot"></span>AZ License #320444</div>
-          <div class="cred-row"><span class="cred-dot"></span>Verified by Psychology Today · 2 Endorsements</div>
+          <div class="cred-row"><span class="cred-dot"></span><a href="https://www.psychologytoday.com/us/psychiatrists/megan-presley-waddell-az/1568151" target="_blank" rel="noopener noreferrer" style="color:var(--rose-dark);font-weight:600;">Verified by Psychology Today</a> · 2 Endorsements</div>
           <div class="cred-row"><span class="cred-dot"></span>U.S. Army Medical Department, Practical Nurse 1996</div>
         </div>
       </div>
